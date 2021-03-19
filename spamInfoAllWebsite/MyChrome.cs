@@ -103,120 +103,115 @@ namespace spamInfoAllWebsite
             Thread.Sleep(Convert.ToInt32(seconds * 1000));
         }
 
-        public MyChrome()
+        public MyChrome(bool HideBrowsers, bool HideImages)
         {
             ChromeDriverService service = ChromeDriverService.CreateDefaultService();
             service.HideCommandPromptWindow = true;
             ChromeOptions options = new ChromeOptions();
             options.AddArguments("--disable-notifications");
-            options.AddArgument("--window-size=1300,1000");
+            options.AddArgument("--window-size=1500,1000");
             options.AddArguments("--disable-extensions");
-            //options.AddArgument("--window-position=-32000,-32000");
+            
+
+            if (HideBrowsers)
+            {
+                options.AddArgument("--window-position=-32000,-32000");
+            }
+
+            if (HideImages)
+            {
+                options.AddArguments("headless", "--blink-settings=imagesEnabled=false");
+            }
+
             //options.AddArguments("--proxy-server=");
             driver = new ChromeDriver(service, options);
         }
 
         public void Quit()
         {
-            Sleep(1);
+            Sleep(2);
             driver.Quit();
         }
 
-        public void Run(MyChrome myChrome, string url, List<string> ten, List<string> sodienthoai, List<string> thudientu, List<string> noidung, List<string> nameTag, string content, string numberPhone, string email, int delay)
+        public void Run(MyChrome myChrome, string url, Dictionary<string,int> ten, Dictionary<string, int> sodienthoai, Dictionary<string, int> thudientu, Dictionary<string, int> noidung, Dictionary<string, int> nameTag, string content, string numberPhone, string email, int delay)
         {
             //string name = "Name";
-
-            url = "https://" + url;
-            bool check = false;
 
             driver.Navigate().GoToUrl(url);
             Sleep(2);
 
+            //Số điện thoại
             try
             {
                 if (sodienthoai.Count > 0)
                 {
-                    for (int i = 0; i < sodienthoai.Count; i++)
+                    foreach (var item in sodienthoai)
                     {
-                        try
+                        for (int i = 0; i < item.Value; i++)
                         {
-                            ElementAction(SEND_KEYS, $"//input[@name='{sodienthoai[i]}']", i, text: numberPhone);
-                            Sleep(1);
-                            check = true;
+                            ElementAction(SEND_KEYS, $"//input[@name='{item.Key}']", i, text: numberPhone);
+                            Sleep(delay);
                         }
-                        catch
-                        {
-                        }
-                    }
+                    }           
                 }
             }
             catch { }
+
+            //Thư
             try
             {
                 if (thudientu.Count > 0)
                 {
-                    for (int i = 0; i < thudientu.Count; i++)
+                    foreach (var item in thudientu)
                     {
-                        try
+                        for (int i = 0; i < item.Value; i++)
                         {
-                            ElementAction(SEND_KEYS, $"//input[@name='{thudientu[i]}']", i, text: email);
-                            Sleep(delay);
-                        }
-                        catch
-                        {
+                            ElementAction(SEND_KEYS, $"//input[@name='{item.Key}']", i, text: email);
+                            Sleep(delay);                          
                         }
                     }
 
                 }
             }
             catch { }
+
+            //Tên
             try
             {
                 if (ten.Count > 0)
                 {
-                    for (int i = 0; i < ten.Count; i++)
+                    foreach (var item in ten)
                     {
-                        try
+                        for (int i = 0; i < item.Value; i++)
                         {
-                            if (check)
-                            {
-                                ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: content);
-                                Sleep(delay);
-                            }
-                            else
-                            {
-                                ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: numberPhone);
-                                Sleep(delay);
-                            }
-
-                        }
-                        catch
-                        {
+                            ElementAction(SEND_KEYS, $"//input[@name='{item.Key}']", i, text: numberPhone);
+                            Sleep(delay);
                         }
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }         
 
+            //Nội dung
             try
             {
                 if (noidung.Count > 0)
                 {
-                    for (int i = 0; i < noidung.Count; i++)
+                    foreach (var item in noidung)
                     {
-                        try
+                        for (int i = 0; i < item.Value; i++)
                         {
-                            ElementAction(SEND_KEYS, $"//input[@name='{noidung[i]}']", i, text: content);
+                            ElementAction(SEND_KEYS, $"//input[@name='{item.Key}']", i, text: content);
                             Sleep(delay);
-                        }
-                        catch
-                        {
                         }
                     }
                 }
             }
             catch { }
 
+            //Trường điền form
             try
             {
                 int textareaCount = driver.FindElements(By.XPath("//textarea")).Count;
@@ -241,10 +236,13 @@ namespace spamInfoAllWebsite
 
             try
             {
-                foreach (string item in nameTag)
+                foreach (var item in nameTag)
                 {
-                    ElementAction(SEND_KEYS, $"//input[@name='{item}']", text: content);
-                    Sleep(delay);
+                    for (int i = 0; i < item.Value; i++)
+                    {
+                        ElementAction(SEND_KEYS, $"//input[@name='{item.Key}']", i, text: content);
+                        Sleep(delay);
+                    }
                 }
             }
             catch
@@ -254,67 +252,81 @@ namespace spamInfoAllWebsite
             int buttonTypeSubmit = driver.FindElements(By.XPath("//input[@type='submit']")).Count;
             int buttonTypeButton = driver.FindElements(By.XPath("//input[@type='button']")).Count;
             int buttonDivSubmit = driver.FindElements(By.XPath("//div[@data-action='submit']")).Count;
-            if (buttonTypeSubmit > 0)
-            {
-                try
-                {
-                    for (int i = 0; i < buttonTypeSubmit; i++)
-                    {
-                        ElementAction(CLICK, $"//input[@type='submit']", i);
-                        Sleep(delay);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            else if (buttonTypeButton > 0)
-            {
-                try
-                {
-                    for (int i = 0; i < buttonTypeButton; i++)
-                    {
-                        ElementAction(CLICK, $"//input[@type='button']", i);
-                        Sleep(delay);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            else if (buttonDivSubmit > 0)
-            {
-                try
-                {
-                    for (int i = 0; i < buttonDivSubmit; i++)
-                    {
-                        ElementAction(CLICK, "//div[@data-action='submit']", i);
-                        Sleep(delay);
-                    }
-                }
-                catch
-                {
-                }
-            }
-            else
-            {
-                try
-                {
-                    int buttonCount = driver.FindElements(By.XPath("//button")).Count;
-                    if (buttonCount > 0)
-                    {
-                        for (int i = 0; i < buttonCount; i++)
-                        {
-                            ElementAction(CLICK, "//button", i);
-                        }
 
-                    }
-                }
-                catch
+            try
+            {
+                for (int i = 0; i < buttonTypeButton; i++)
                 {
+                    ElementAction(CLICK, $"//input[@type='button']", i);
+                    Sleep(delay);
                 }
+            }
+            catch
+            {
+            }
+            try
+            {
+                for (int i = 0; i < buttonTypeSubmit; i++)
+                {
+                    ElementAction(CLICK, $"//input[@type='submit']", i);
+                    Sleep(delay);
+                }
+            }
+            catch
+            {
+            }
+            try
+            {
+                for (int i = 0; i < buttonDivSubmit; i++)
+                {
+                    ElementAction(CLICK, "//div[@data-action='submit']", i);
+                    Sleep(delay);
+                }
+            }
+            catch
+            {
+            }
+            try
+            {
+                int buttonCount = driver.FindElements(By.XPath("//button[not(@name='s')]")).Count;
+                if (buttonCount > 0)
+                {
+                    for (int i = buttonCount; i > 0; i--)
+                    {
+                        ElementAction(CLICK, "//button[not(@name='s')]", i);
+                        Sleep(delay);
+                    }
+
+                }
+            }
+            catch
+            {
             }
             Sleep(5);
+
         }
     }
 }
+
+
+//for (int i = 0; i < ten.Count; i++)
+//{
+//    //try
+//    //{
+//        if (check)
+//        {
+//            ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: content);
+//            Sleep(delay);
+//        }
+//        else
+//        {
+//            ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: numberPhone);
+//            Sleep(delay);
+//        }
+
+
+//    //}
+//    //catch
+//    //{
+//    //}
+//}

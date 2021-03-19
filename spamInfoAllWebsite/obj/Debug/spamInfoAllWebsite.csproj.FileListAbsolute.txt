@@ -12,3 +12,16 @@ D:\project2021\CSharp\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAl
 D:\project2021\CSharp\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.csproj.CopyComplete
 D:\project2021\CSharp\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.exe
 D:\project2021\CSharp\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.pdb
+E:\spamInfoAllWebsite\spamInfoAllWebsite\bin\Debug\spamInfoAllWebsite.exe.config
+E:\spamInfoAllWebsite\spamInfoAllWebsite\bin\Debug\spamInfoAllWebsite.exe
+E:\spamInfoAllWebsite\spamInfoAllWebsite\bin\Debug\spamInfoAllWebsite.pdb
+E:\spamInfoAllWebsite\spamInfoAllWebsite\bin\Debug\WebDriver.dll
+E:\spamInfoAllWebsite\spamInfoAllWebsite\bin\Debug\WebDriver.xml
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.csprojAssemblyReference.cache
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.FormMain.resources
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.Properties.Resources.resources
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.csproj.GenerateResource.cache
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.csproj.CoreCompileInputs.cache
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.csproj.CopyComplete
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.exe
+E:\spamInfoAllWebsite\spamInfoAllWebsite\obj\Debug\spamInfoAllWebsite.pdb

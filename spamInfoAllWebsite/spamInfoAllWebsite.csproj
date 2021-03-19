@@ -76,6 +76,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -90,6 +91,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\logo-website-website-logo-png-transparent-background-background-15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\U uogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\icons8-start-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\icons8-start-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="images\icons8-start-48.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.WebDriver.ChromeDriver.89.0.4389.2300\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\packages\Selenium.WebDriver.ChromeDriver.89.0.4389.2300\build\Selenium.WebDriver.ChromeDriver.targets')" />
