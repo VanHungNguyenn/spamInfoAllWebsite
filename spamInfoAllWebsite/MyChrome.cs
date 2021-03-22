@@ -259,6 +259,12 @@ namespace spamInfoAllWebsite
                 {
                     ElementAction(CLICK, $"//input[@type='button']", i);
                     Sleep(delay);
+                    string url_new = driver.Url;
+                    if (url_new != url && url_new != url + "/")
+                    {
+                        driver.Navigate().Back();
+                        Sleep(delay);
+                    }
                 }
             }
             catch
@@ -270,6 +276,12 @@ namespace spamInfoAllWebsite
                 {
                     ElementAction(CLICK, $"//input[@type='submit']", i);
                     Sleep(delay);
+                    string url_new = driver.Url;
+                    if (url_new != url && url_new != url + "/")
+                    {
+                        driver.Navigate().Back();
+                        Sleep(delay);
+                    }
                 }
             }
             catch
@@ -281,6 +293,12 @@ namespace spamInfoAllWebsite
                 {
                     ElementAction(CLICK, "//div[@data-action='submit']", i);
                     Sleep(delay);
+                    string url_new = driver.Url;
+                    if (url_new != url && url_new != url + "/")
+                    {
+                        driver.Navigate().Back();
+                        Sleep(delay);
+                    }
                 }
             }
             catch
@@ -288,15 +306,34 @@ namespace spamInfoAllWebsite
             }
             try
             {
-                int buttonCount = driver.FindElements(By.XPath("//button[not(@name='s')]")).Count;
+                int buttonCount = driver.FindElements(By.XPath("//button[@type='submit' or @type='button']")).Count;
                 if (buttonCount > 0)
                 {
-                    for (int i = buttonCount; i > 0; i--)
+                    for (int i = 0; i < buttonCount; i++)
                     {
-                        ElementAction(CLICK, "//button[not(@name='s')]", i);
-                        Sleep(delay);
-                    }
+                        try
+                        {
+                            ElementAction(CLICK, "//button[@type='submit' or @type='button']", i);
+                            Sleep(delay);
+                            string url_new = driver.Url;
+                            if (url_new != url && url_new != url + "/")
+                            {
+                                driver.Navigate().Back();
+                                Sleep(delay);
+                                url_new = driver.Url;
+                                if (url_new != url && url_new != url + "/")
+                                {
+                                    driver.Navigate().Back();
+                                    Sleep(delay);
+                                }
+                                    
+                            }
+                        }
+                        catch 
+                        {
 
+                        }                                      
+                    }
                 }
             }
             catch
@@ -308,25 +345,3 @@ namespace spamInfoAllWebsite
     }
 }
 
-
-//for (int i = 0; i < ten.Count; i++)
-//{
-//    //try
-//    //{
-//        if (check)
-//        {
-//            ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: content);
-//            Sleep(delay);
-//        }
-//        else
-//        {
-//            ElementAction(SEND_KEYS, $"//input[@name='{ten[i]}']", i, text: numberPhone);
-//            Sleep(delay);
-//        }
-
-
-//    //}
-//    //catch
-//    //{
-//    //}
-//}

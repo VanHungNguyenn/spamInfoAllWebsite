@@ -368,6 +368,8 @@ namespace spamInfoAllWebsite
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
             dGV.Rows.Clear();
+
+            urlAddHttp.Clear();
         }
 
         private void btnPause_Click(object sender, EventArgs e)
